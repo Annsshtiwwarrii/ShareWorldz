@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "530978259927",
+    "project_id": "shareworldz",
+    "storage_bucket": "shareworldz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:530978259927:android:2d2a329319fedd0b76c192",
+        "android_client_info": {
+          "package_name": "com.example.shareworldz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLjQ0xdLRxZ8OzPEfb57y_HCnYdDIMFWU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
