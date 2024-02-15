@@ -59,6 +59,7 @@ dependencies {
 
     // Import the BoM for the Firebase platform
     implementation(platform("com.google.firebase:firebase-bom:32.7.2"))
+    implementation ("com.squareup.picasso:picasso:2.8")
 
 
 }
