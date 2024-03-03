@@ -28,7 +28,7 @@
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name"
+                android:text="name"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -49,19 +49,18 @@
     </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/profile_info_layout"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+        android:background="@color/white"
+        android:minHeight="10dp" />
 
     <!-- ViewPager for handling content within tabs -->
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/profile_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/tab_layout" />
+        android:layout_below="@id/tabLayout" />
 
 </RelativeLayout>

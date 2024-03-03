@@ -3,31 +3,35 @@ package com.example.shareworldz.fragments
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.shareworldz.Models.Post
+import com.example.shareworldz.Models.User
 import com.example.shareworldz.R
+import com.example.shareworldz.adaptors.FollowRvAdapter
+import com.example.shareworldz.adaptors.PostAdapter
+import com.example.shareworldz.databinding.FragmentHome2Binding
+import com.example.shareworldz.utils.FOLLOW
+import com.example.shareworldz.utils.POST
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
+import com.google.firebase.firestore.firestore
+import com.google.firebase.firestore.toObject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
+    private lateinit var binding: FragmentHome2Binding
+    private var postList = ArrayList<Post>()
+    private lateinit var adapter: PostAdapter
+    private var followList = ArrayList<User>()
+    private lateinit var followRvAdapter: FollowRvAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+
     }
 
     override fun onCreateView(
@@ -35,26 +39,48 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home2, container, false)
+        binding = FragmentHome2Binding.inflate(inflater, container, false)
+        followRvAdapter = FollowRvAdapter(requireContext(),followList)
+        adapter = PostAdapter(requireContext(), postList)
+        binding.postRv.layoutManager = LinearLayoutManager(requireContext())
+        binding.postRv.adapter = adapter
+        binding.followRv.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        binding.followRv.adapter = followRvAdapter
+        followRvAdapter = FollowRvAdapter(requireContext(), followList)
+        setHasOptionsMenu(true)
+        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.materialToolbar2)
+        Firebase.firestore.collection(Firebase.auth.currentUser!!.uid + FOLLOW).get()
+            .addOnSuccessListener {
+                var tempList = arrayListOf<User>()
+                followList.clear()
+                for (i in it.documents) {
+                    var user: User = i.toObject<User>()!!
+                    tempList.add(user)
+                }
+                followList.addAll(tempList)
+                followRvAdapter.notifyDataSetChanged()
+            }
+        Firebase.firestore.collection(POST).get().addOnSuccessListener {
+            var tempList = ArrayList<Post>()
+            postList.clear()
+            for (i in it.documents) {
+                var post: Post = i.toObject<Post>()!!
+                tempList.add(post)
+            }
+            postList.addAll(tempList)
+            adapter.notifyDataSetChanged()
+        }
+        return binding.root
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.option_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 }

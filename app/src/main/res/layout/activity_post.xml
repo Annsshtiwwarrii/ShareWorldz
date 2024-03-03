@@ -10,9 +10,109 @@
         android:id="@+id/materialToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F8F1F1"
+        android:background="@color/white"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
+
         app:title="New Post"
         tools:ignore="MissingConstraints" />
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/select_image"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/image"
+        app:layout_constraintEnd_toEndOf="@+id/materialToolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialToolbar"
+        app:riv_border_color="#333333"
+
+        app:riv_border_width="2dip"
+        app:riv_corner_radius="30dip" />
+
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingRight="40dp"
+        android:text="your post may be appear in Post and can be seen in post tab under your profile"
+        app:layout_constraintStart_toStartOf="@+id/post"
+        app:layout_constraintTop_toBottomOf="@+id/post" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6">
+
+        <Button
+            android:id="@+id/cancel_button"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:text="Cancel"
+            android:textColor="@color/grey"
+            app:strokeColor="@color/pink" />
+
+        <Button
+            android:id="@+id/post_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/blue"
+            android:text="Post" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/caption"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="write a caption"
+        android:visibility="visible"
+        app:boxStrokeColor="@color/pink"
+        app:layout_constraintEnd_toEndOf="@+id/select_image"
+        app:layout_constraintStart_toStartOf="@+id/select_image"
+        app:layout_constraintTop_toBottomOf="@+id/select_image" />
+
+    <LinearLayout
+        android:id="@+id/post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/caption">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/image" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+
+            android:text="Share to Post"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

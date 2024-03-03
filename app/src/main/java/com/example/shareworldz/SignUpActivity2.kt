@@ -31,9 +31,7 @@ class SignUpActivity2 : AppCompatActivity() {
     private val launcher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         uri?.let {
             uploadimage(uri, USER_PROFILE_FOLDER) {
-                if (user == null) {
-
-                } else {
+                if (it != null) {
                     user.image = it
                     binding.profileImage.setImageURI(uri)
                 }
